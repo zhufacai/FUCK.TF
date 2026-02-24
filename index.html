@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fuck.TF</title>
+    <title>FUCK.TF</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -152,9 +152,50 @@
             font-size: 1.3rem;
             color: #aaa;
             max-width: 800px;
-            margin: 2rem auto 3rem;
+            margin: 2rem auto 2rem;
             font-weight: 300;
             line-height: 1.7;
+        }
+        
+        /* 查看档案按钮 */
+        .archive-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff3366 0%, #ff9933 100%);
+            color: white;
+            border: none;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(255, 51, 102, 0.3);
+        }
+        
+        .archive-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255, 51, 102, 0.4);
+        }
+        
+        .archive-btn:active {
+            transform: translateY(-1px);
+            box-shadow: 0 5px 15px rgba(255, 51, 102, 0.3);
+        }
+        
+        .archive-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%);
+            border-radius: 50px;
         }
         
         /* 档案页面内容 */
@@ -236,6 +277,7 @@
             height: 200px;
             width: 100%;
             overflow: hidden;
+            cursor: pointer;
         }
         
         .card-image img {
@@ -284,7 +326,7 @@
         }
         
         /* 关于页面内容 */
-        #about-content, #contact-content {
+        #about-content {
             display: none;
             animation: fadeIn 0.5s ease;
         }
@@ -330,7 +372,7 @@
             line-height: 1.6;
         }
         
-        .about-content, .contact-content {
+        .about-content {
             max-width: 800px;
             margin: 0 auto;
             background: rgba(20, 20, 20, 0.7);
@@ -340,62 +382,61 @@
             backdrop-filter: blur(10px);
         }
         
-        .contact-form {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-            margin-top: 2rem;
+        /* 图片放大模态框 */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
         }
         
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
         }
         
-        .form-group label {
-            font-size: 0.95rem;
-            color: #ccc;
-            font-weight: 500;
-        }
-        
-        .form-group input, .form-group textarea {
-            padding: 0.8rem 1rem;
-            background: rgba(30, 30, 30, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        .modal-content img {
+            max-width: 100%;
+            max-height: 90vh;
             border-radius: 8px;
-            color: #fff;
-            font-size: 1rem;
-            font-family: inherit;
-            transition: border-color 0.3s;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
         
-        .form-group input:focus, .form-group textarea:focus {
-            outline: none;
-            border-color: #ff3366;
-        }
-        
-        .form-group textarea {
-            min-height: 150px;
-            resize: vertical;
-        }
-        
-        .submit-btn {
-            background: linear-gradient(135deg, #ff3366 0%, #ff9933 100%);
+        .modal-close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            background: #ff3366;
             color: white;
             border: none;
-            padding: 1rem 2rem;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 600;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            font-size: 1.2rem;
             cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
-            margin-top: 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background 0.3s;
         }
         
-        .submit-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(255, 51, 102, 0.3);
+        .modal-close:hover {
+            background: #ff0033;
+        }
+        
+        .modal-caption {
+            text-align: center;
+            margin-top: 1rem;
+            color: #ddd;
+            font-size: 1.1rem;
         }
         
         /* 装饰元素 */
@@ -463,8 +504,13 @@
                 gap: 1.5rem;
             }
             
-            .about-content, .contact-content {
+            .about-content {
                 padding: 1.5rem;
+            }
+            
+            .archive-btn {
+                padding: 0.9rem 2rem;
+                font-size: 1rem;
             }
         }
         
@@ -486,6 +532,11 @@
             .archive-grid {
                 grid-template-columns: 1fr;
             }
+            
+            .archive-btn {
+                padding: 0.8rem 1.8rem;
+                font-size: 0.95rem;
+            }
         }
     </style>
 </head>
@@ -503,9 +554,17 @@
             <a id="home-link" class="active">主页</a>
             <a id="archive-link">档案</a>
             <a id="about-link">关于</a>
-            <a id="contact-link">联系</a>
         </div>
     </nav>
+    
+    <!-- 图片放大模态框 -->
+    <div class="modal-overlay" id="imageModal">
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose">&times;</button>
+            <img id="modalImage" src="" alt="放大图片">
+            <div class="modal-caption" id="modalCaption"></div>
+        </div>
+    </div>
     
     <!-- 内容容器 -->
     <div class="content-container">
@@ -516,6 +575,7 @@
                 一段记忆，一种情感，一场青春。这里记录着时光深处的故事，那些热烈、冲动、美好与遗憾交织的瞬间。<br>
                 每个名字背后都有一段独特的往事，每段往事都构成了今天的我们。
             </p>
+            <button class="archive-btn" id="home-archive-btn">查看档案</button>
         </div>
         
         <!-- 档案页面内容 -->
@@ -524,7 +584,7 @@
                 <h1 class="archive-title">时光档案</h1>
                 <p class="archive-description">
                     这里收藏着那些无法忘怀的瞬间，每一段故事都是青春的一部分。<br>
-                    点击卡片，重温那些年的悸动与感动。
+                    点击图片放大查看，重温那些年的悸动与感动。
                 </p>
             </div>
             
@@ -550,39 +610,6 @@
                 <p>所有内容均为虚构创作，如有雷同，纯属巧合。</p>
             </div>
         </div>
-        
-        <!-- 联系页面内容 -->
-        <div id="contact-content">
-            <div class="page-header">
-                <h1 class="page-title">联系我们</h1>
-                <p class="page-description">
-                    分享你的故事，连接彼此的记忆
-                </p>
-            </div>
-            
-            <div class="contact-content">
-                <p>如果你也有想要分享的故事，或者对这个网站有任何建议，欢迎通过以下方式联系我们：</p>
-                
-                <form class="contact-form" id="contact-form">
-                    <div class="form-group">
-                        <label for="name">姓名</label>
-                        <input type="text" id="name" placeholder="请输入您的姓名">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="email">邮箱</label>
-                        <input type="email" id="email" placeholder="请输入您的邮箱地址">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="message">留言</label>
-                        <textarea id="message" placeholder="请写下您想分享的故事或建议..."></textarea>
-                    </div>
-                    
-                    <button type="submit" class="submit-btn">发送消息</button>
-                </form>
-            </div>
-        </div>
     </div>
     
     <!-- 浮动装饰元素 -->
@@ -590,69 +617,100 @@
     
     <!-- 页脚 -->
     <footer>
-        <p>© 2026 Fuck.TF 保留所有权利</p>
-        <p class="domain-info">fuck.tf</p>
+        <p>© 2026 FUCK.TF 保留所有权利</p>
+        <p class="domain-info">花有重开日，人无再少年。</p>
         <p style="margin-top: 1rem; font-size: 0.8rem; color: #555;">本页面仅为艺术设计展示，内容纯属虚构</p>
     </footer>
     
     <script>
         // 档案数据
-        const archiveData = [
-            {
-                id: 1,
-                title: "夏日的蝉鸣",
-                subtitle: "2018 · 南京",
-                description: "那个夏天，梧桐树下的相遇。记得你穿着白色的连衣裙，笑容比阳光还灿烂。我们走遍了整座城市，从清晨到日暮。",
-                image: "https://images.unsplash.com/photo-1560703650-ef3e0f254ae0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                time: "2018年7月",
-                location: "南京"
-            },
-            {
-                id: 2,
-                title: "冬夜的温度",
-                subtitle: "2020 · 北京",
-                description: "北京的第一个冬天，我们在暖气房里相拥。窗外飘着雪花，屋内温暖如春。你教我煮热红酒，说这是冬天的仪式感。",
-                image: "https://images.unsplash.com/photo-1512386233331-f023884a92e8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                time: "2020年12月",
-                location: "北京"
-            },
-            {
-                id: 3,
-                title: "海边的承诺",
-                subtitle: "2019 · 厦门",
-                description: "鼓浪屿的浪花见证了我们许下的诺言。你说大海不会忘记，就像我永远不会忘记你眼里的星辰。",
-                image: "https://images.unsplash.com/photo-1519046904884-53103b34b206?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                time: "2019年8月",
-                location: "厦门"
-            },
-            {
-                id: 4,
-                title: "雨中的奔跑",
-                subtitle: "2021 · 杭州",
-                description: "突如其来的暴雨，我们在大雨中奔跑。浑身湿透却笑得像个孩子。你说这是最浪漫的狼狈。",
-                image: "https://images.unsplash.com/photo-1439066615861-d1af74d74000?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                time: "2021年5月",
-                location: "杭州"
-            },
-            {
-                id: 5,
-                title: "山顶的日出",
-                subtitle: "2022 · 黄山",
-                description: "凌晨三点开始爬山，只为了和你一起看日出。当太阳升起的那一刻，整个世界都是金色的。",
-                image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                time: "2022年10月",
-                location: "黄山"
-            },
-            {
-                id: 6,
-                title: "图书馆的午后",
-                subtitle: "2017 · 上海",
-                description: "阳光透过百叶窗洒在你的侧脸，你专注看书的样子让我心动。那是我们第一次相遇的地方。",
-                image: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                time: "2017年3月",
-                location: "上海"
-            }
-        ];
+        // 完整的档案数据，共15个，按时间排序
+const archiveData = [
+    {
+        id: 1,
+        title: "初春的雪融",
+        subtitle: "2018 · 阜康",
+        description: "天山脚下的冰雪刚开始融化，我们走在初春的街头，你哈着白气说阜康的春天来得特别晚。",
+        image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        time: "2018年3月",
+        location: "阜康"
+    },
+    {
+        id: 2,
+        title: "秋日的约定",
+        subtitle: "2018 · 阜康",
+        description: "金黄色的胡杨林下，你拾起一片落叶夹在书页里。你说每个秋天都要来这里，看叶子由绿变黄。",
+        image: "https://images.unsplash.com/photo-1512386233331-f023884a92e8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        time: "2018年10月",
+        location: "阜康"
+    },
+    {
+        id: 3,
+        title: "天池边的夏日",
+        subtitle: "2019 · 阜康",
+        description: "天池的水清澈见底，倒映着博格达峰。你在湖边许愿，说希望时间永远停留在这一刻。",
+        image: "https://images.unsplash.com/photo-1505142468610-359e7d316be0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        time: "2019年7月",
+        location: "阜康"
+    },
+    {
+        id: 4,
+        title: "六月的薰衣草",
+        subtitle: "2021 · 昌吉",
+        description: "昌吉的薰衣草田一望无际，紫色的海洋中你的笑容格外明媚。空气中弥漫着花香，还有你发间的清香。",
+        image: "https://images.unsplash.com/photo-1519046904884-53103b34b206?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        time: "2021年6月",
+        location: "昌吉"
+    },
+    {
+        id: 5,
+        title: "春天的重逢",
+        subtitle: "2022 · 昌吉",
+        description: "时隔一年再次相见，昌吉的桃花开得正艳。你说有些感情就像这桃花，每年都会如期盛开。",
+        image: "https://images.unsplash.com/photo-1519046904884-53103b34b206?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        time: "2022年4月",
+        location: "昌吉"
+    },
+    {
+        id: 6,
+        title: "伊犁河的春天",
+        subtitle: "2023 · 伊宁",
+        description: "四月的伊犁河畔，杏花如雪。你在花雨中旋转，花瓣落在你的肩头，那一刻美得像一幅画。",
+        image: "https://images.unsplash.com/photo-1560703650-ef3e0f254ae0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        time: "2023年4月",
+        location: "伊宁"
+    },
+    {
+        id: 7,
+        title: "故地重游",
+        subtitle: "2023 · 阜康",
+        description: "再次回到阜康，走过我们曾经走过的街道。梧桐树长大了，街角那家奶茶店还在，只是身边已没有你。",
+        image: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        time: "2023年4月",
+        location: "阜康"
+    },
+    {
+        id: 8,
+        title: "秋天的告别",
+        subtitle: "2023 · 昌吉",
+        description: "昌吉的秋天，落叶铺满了整条街道。你说你要去远方，我笑着说祝你幸福，转身时眼泪却不争气地流下来。",
+        image: "https://images.unsplash.com/photo-1560703650-ef3e0f254ae0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        time: "2023年9月",
+        location: "昌吉"
+    },
+    {
+        id: 9,
+        title: "昭苏的夏天",
+        subtitle: "2025 · 昭苏",
+        description: "昭苏的油菜花海，金黄色的波浪延伸到天际。你说这是你见过最美的夏天，我说因为有你在。",
+        image: "https://images.unsplash.com/photo-1439066615861-d1af74d74000?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        time: "2025年8月",
+        location: "昭苏"
+    }
+];
+
+
+
         
         // 创建浮动元素
         function createFloatingElements() {
@@ -694,7 +752,7 @@
                 card.className = 'archive-card';
                 card.innerHTML = `
                     <div class="card-image">
-                        <img src="${item.image}" alt="${item.title}" loading="lazy">
+                        <img src="${item.image}" alt="${item.title}" loading="lazy" data-title="${item.title}" data-subtitle="${item.subtitle}">
                     </div>
                     <div class="card-content">
                         <h3 class="card-title">${item.title}</h3>
@@ -707,13 +765,35 @@
                     </div>
                 `;
                 
-                // 添加点击事件
-                card.addEventListener('click', function() {
-                    alert(`查看详情: ${item.title}\n时间: ${item.time}\n地点: ${item.location}`);
+                // 为图片添加点击事件，用于放大查看
+                const cardImage = card.querySelector('.card-image img');
+                cardImage.addEventListener('click', function() {
+                    openImageModal(item.image, item.title, item.subtitle);
                 });
                 
                 archiveGrid.appendChild(card);
             });
+        }
+        
+        // 打开图片模态框
+        function openImageModal(imageSrc, title, subtitle) {
+            const modal = document.getElementById('imageModal');
+            const modalImage = document.getElementById('modalImage');
+            const modalCaption = document.getElementById('modalCaption');
+            
+            modalImage.src = imageSrc;
+            modalImage.alt = title;
+            modalCaption.textContent = `${title} - ${subtitle}`;
+            
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden'; // 防止背景滚动
+        }
+        
+        // 关闭图片模态框
+        function closeImageModal() {
+            const modal = document.getElementById('imageModal');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto'; // 恢复背景滚动
         }
         
         // 页面切换功能
@@ -722,7 +802,6 @@
             document.getElementById('home-content').style.display = 'none';
             document.getElementById('archive-content').style.display = 'none';
             document.getElementById('about-content').style.display = 'none';
-            document.getElementById('contact-content').style.display = 'none';
             
             // 显示目标页面
             document.getElementById(pageId).style.display = 'block';
@@ -739,8 +818,6 @@
                 document.getElementById('archive-link').classList.add('active');
             } else if (pageId === 'about-content') {
                 document.getElementById('about-link').classList.add('active');
-            } else if (pageId === 'contact-content') {
-                document.getElementById('contact-link').classList.add('active');
             }
         }
         
@@ -769,28 +846,26 @@
                 switchPage('about-content');
             });
             
-            document.getElementById('contact-link').addEventListener('click', function() {
-                switchPage('contact-content');
+            // 设置主页"查看档案"按钮事件
+            document.getElementById('home-archive-btn').addEventListener('click', function() {
+                switchPage('archive-content');
             });
             
-            // 设置联系表单提交事件
-            document.getElementById('contact-form').addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                const name = document.getElementById('name').value;
-                const email = document.getElementById('email').value;
-                const message = document.getElementById('message').value;
-                
-                if (!name || !email || !message) {
-                    alert('请填写所有字段');
-                    return;
+            // 设置图片模态框事件
+            document.getElementById('modalClose').addEventListener('click', closeImageModal);
+            
+            // 点击模态框背景关闭
+            document.getElementById('imageModal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeImageModal();
                 }
-                
-                // 模拟表单提交
-                alert(`感谢您的留言，${name}！我们会尽快回复您。`);
-                
-                // 清空表单
-                document.getElementById('contact-form').reset();
+            });
+            
+            // 按ESC键关闭模态框
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    closeImageModal();
+                }
             });
             
             // 视频加载失败时使用备用背景
