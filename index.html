@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fuck.TF</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            background-color: #0a0a0a;
+            color: #fff;
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(120, 119, 198, 0.05) 0%, transparent 55%),
+                radial-gradient(circle at 85% 30%, rgba(255, 50, 50, 0.05) 0%, transparent 55%);
+        }
+        
+        /* 视频背景 */
+        #video-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            opacity: 0.3;
+            filter: brightness(0.7);
+        }
+        
+        /* 导航栏 */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 5%;
+            position: relative;
+            z-index: 10;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #ff3366;
+            letter-spacing: -0.5px;
+            text-transform: uppercase;
+        }
+        
+        .logo span {
+            color: #fff;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            color: #ccc;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #ff3366;
+        }
+        
+        /* 主内容区域 */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+            z-index: 5;
+        }
+        
+        .main-title {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+            letter-spacing: -1px;
+            background: linear-gradient(135deg, #ff3366 0%, #ff9933 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 5px 15px rgba(255, 51, 102, 0.2);
+            position: relative;
+            padding-bottom: 1.5rem;
+        }
+        
+        .main-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #ff3366, transparent);
+            border-radius: 2px;
+        }
+        
+        .subtitle {
+            font-size: 1.3rem;
+            color: #aaa;
+            max-width: 800px;
+            margin: 2rem auto 3rem;
+            font-weight: 300;
+            line-height: 1.7;
+        }
+        
+        /* 装饰元素 */
+        .floating-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .floating-element {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background-color: rgba(255, 51, 102, 0.6);
+            border-radius: 50%;
+            box-shadow: 0 0 10px 2px rgba(255, 51, 102, 0.4);
+        }
+        
+        /* 页脚 */
+        footer {
+            padding: 2rem 5%;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            font-size: 0.9rem;
+            color: #777;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .domain-info {
+            font-family: monospace;
+            font-size: 1.1rem;
+            color: #ff3366;
+            margin-top: 0.5rem;
+            letter-spacing: 1px;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 1.5rem;
+                padding: 1.5rem 1rem;
+            }
+            
+            .main-title {
+                font-size: 2.8rem;
+            }
+            
+            .subtitle {
+                font-size: 1.1rem;
+                padding: 0 1rem;
+            }
+            
+            .nav-links {
+                gap: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .main-title {
+                font-size: 2.2rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 背景视频 -->
+    <video autoplay muted loop id="video-bg">
+        <source src="1.mp4" type="video/mp4">
+        您的浏览器不支持视频标签。
+    </video>
+    
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="logo">FUCK<span>.TF</span></div>
+        <div class="nav-links">
+            <a href="#home">主页</a>
+            <a href="#archive">档案</a>
+            <a href="#about">关于</a>
+            <a href="#contact">联系</a>
+        </div>
+    </nav>
+    
+    <!-- 主内容区域 -->
+    <main class="main-content">
+        <h1 class="main-title">那些年操过的女孩</h1>
+        <p class="subtitle">
+            一段记忆，一种情感，一场青春。这里记录着时光深处的故事，那些热烈、冲动、美好与遗憾交织的瞬间。<br>
+            每个名字背后都有一段独特的往事，每段往事都构成了今天的我们。
+        </p>
+    </main>
+    
+    <!-- 浮动装饰元素 -->
+    <div class="floating-elements" id="floating-elements"></div>
+    
+    <!-- 页脚 -->
+    <footer>
+        <p>© 2026 Fuck.TF 保留所有权利</p>
+        <p class="domain-info">fuck.tf</p>
+        <p style="margin-top: 1rem; font-size: 0.8rem; color: #555;">本页面仅为艺术设计展示，内容纯属虚构</p>
+    </footer>
+    
+    <script>
+        // 创建浮动元素
+        function createFloatingElements() {
+            const container = document.getElementById('floating-elements');
+            const elementCount = 25;
+            
+            for (let i = 0; i < elementCount; i++) {
+                const element = document.createElement('div');
+                element.classList.add('floating-element');
+                
+                // 随机位置
+                const posX = Math.random() * 100;
+                const posY = Math.random() * 100;
+                
+                // 随机大小
+                const size = 2 + Math.random() * 4;
+                
+                // 随机动画延迟和持续时间
+                const delay = Math.random() * 5;
+                const duration = 15 + Math.random() * 20;
+                
+                // 设置样式
+                element.style.left = `${posX}%`;
+                element.style.top = `${posY}%`;
+                element.style.width = `${size}px`;
+                element.style.height = `${size}px`;
+                element.style.animation = `float ${duration}s ease-in-out ${delay}s infinite`;
+                
+                container.appendChild(element);
+            }
+        }
+        
+        // 添加浮动动画CSS
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes float {
+                0%, 100% {
+                    transform: translate(0, 0) scale(1);
+                    opacity: 0.7;
+                }
+                25% {
+                    transform: translate(10px, -20px) scale(1.1);
+                    opacity: 0.9;
+                }
+                50% {
+                    transform: translate(-15px, 10px) scale(0.9);
+                    opacity: 0.6;
+                }
+                75% {
+                    transform: translate(5px, 15px) scale(1.05);
+                    opacity: 0.8;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            createFloatingElements();
+            
+            // 为导航链接添加平滑滚动
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    // 这里可以添加页面滚动逻辑
+                    alert('导航功能示例 - 实际项目中这里会跳转到对应部分');
+                });
+            });
+            
+            // 视频加载失败时使用备用背景
+            const videoBg = document.getElementById('video-bg');
+            videoBg.addEventListener('error', function() {
+                document.body.style.background = 'radial-gradient(circle at 20% 50%, #1a1a2e 0%, #16213e 50%, #0f3460 100%)';
+                videoBg.style.display = 'none';
+            });
+        });
+    </script>
+</body>
+</html>
