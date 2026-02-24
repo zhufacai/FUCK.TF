@@ -56,6 +56,7 @@
             color: #ff3366;
             letter-spacing: -0.5px;
             text-transform: uppercase;
+            cursor: pointer;
         }
         
         .logo span {
@@ -73,23 +74,51 @@
             font-weight: 500;
             font-size: 0.95rem;
             transition: color 0.3s;
+            cursor: pointer;
+            position: relative;
+            padding: 5px 0;
         }
         
         .nav-links a:hover {
             color: #ff3366;
         }
         
-        /* 主内容区域 */
-        .main-content {
+        .nav-links a.active {
+            color: #ff3366;
+        }
+        
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, #ff3366, #ff9933);
+            border-radius: 1px;
+        }
+        
+        /* 内容区域 */
+        .content-container {
             flex: 1;
+            position: relative;
+            z-index: 5;
+            padding: 2rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        
+        /* 主页内容 */
+        #home-content {
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 4rem 2rem;
+            height: 100%;
             text-align: center;
-            position: relative;
-            z-index: 5;
+            padding: 4rem 2rem;
+            animation: fadeIn 0.5s ease;
         }
         
         .main-title {
@@ -128,9 +157,250 @@
             line-height: 1.7;
         }
         
+        /* 档案页面内容 */
+        #archive-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .archive-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .archive-title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+            letter-spacing: -1px;
+            background: linear-gradient(135deg, #ff3366 0%, #ff9933 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 5px 15px rgba(255, 51, 102, 0.2);
+            position: relative;
+            padding-bottom: 1rem;
+        }
+        
+        .archive-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #ff3366, transparent);
+            border-radius: 2px;
+        }
+        
+        .archive-description {
+            font-size: 1.2rem;
+            color: #aaa;
+            max-width: 800px;
+            margin: 0 auto;
+            font-weight: 300;
+            line-height: 1.6;
+        }
+        
+        /* 档案网格 */
+        .archive-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .archive-card {
+            background: rgba(20, 20, 20, 0.7);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+        }
+        
+        .archive-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(255, 51, 102, 0.2);
+            border-color: rgba(255, 51, 102, 0.3);
+        }
+        
+        .card-image {
+            height: 200px;
+            width: 100%;
+            overflow: hidden;
+        }
+        
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .archive-card:hover .card-image img {
+            transform: scale(1.05);
+        }
+        
+        .card-content {
+            padding: 1.5rem;
+        }
+        
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+        
+        .card-subtitle {
+            font-size: 1rem;
+            color: #ff3366;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+        
+        .card-description {
+            font-size: 0.95rem;
+            color: #aaa;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        .card-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: #777;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 1rem;
+        }
+        
+        /* 关于页面内容 */
+        #about-content, #contact-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .page-title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+            letter-spacing: -1px;
+            background: linear-gradient(135deg, #ff3366 0%, #ff9933 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 5px 15px rgba(255, 51, 102, 0.2);
+            position: relative;
+            padding-bottom: 1rem;
+        }
+        
+        .page-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #ff3366, transparent);
+            border-radius: 2px;
+        }
+        
+        .page-description {
+            font-size: 1.2rem;
+            color: #aaa;
+            max-width: 800px;
+            margin: 0 auto;
+            font-weight: 300;
+            line-height: 1.6;
+        }
+        
+        .about-content, .contact-content {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(20, 20, 20, 0.7);
+            border-radius: 12px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+        }
+        
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        .form-group label {
+            font-size: 0.95rem;
+            color: #ccc;
+            font-weight: 500;
+        }
+        
+        .form-group input, .form-group textarea {
+            padding: 0.8rem 1rem;
+            background: rgba(30, 30, 30, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: #ff3366;
+        }
+        
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(135deg, #ff3366 0%, #ff9933 100%);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin-top: 1rem;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 51, 102, 0.3);
+        }
+        
         /* 装饰元素 */
         .floating-elements {
-            position: absolute;
+            position: fixed;
             width: 100%;
             height: 100%;
             top: 0;
@@ -175,11 +445,11 @@
                 padding: 1.5rem 1rem;
             }
             
-            .main-title {
+            .main-title, .archive-title, .page-title {
                 font-size: 2.8rem;
             }
             
-            .subtitle {
+            .subtitle, .archive-description, .page-description {
                 font-size: 1.1rem;
                 padding: 0 1rem;
             }
@@ -187,14 +457,23 @@
             .nav-links {
                 gap: 1.5rem;
             }
+            
+            .archive-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 1.5rem;
+            }
+            
+            .about-content, .contact-content {
+                padding: 1.5rem;
+            }
         }
         
         @media (max-width: 480px) {
-            .main-title {
+            .main-title, .archive-title, .page-title {
                 font-size: 2.2rem;
             }
             
-            .subtitle {
+            .subtitle, .archive-description, .page-description {
                 font-size: 1rem;
             }
             
@@ -203,35 +482,108 @@
                 justify-content: center;
                 gap: 1rem;
             }
+            
+            .archive-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
     <!-- 背景视频 -->
     <video autoplay muted loop id="video-bg">
-        <source src="1.mp4" type="video/mp4">
+        <source src="https://assets.mixkit.co/videos/preview/mixkit-close-up-of-a-blue-burning-fire-1238-large.mp4" type="video/mp4">
         您的浏览器不支持视频标签。
     </video>
     
     <!-- 导航栏 -->
     <nav class="navbar">
-        <div class="logo">FUCK<span>.TF</span></div>
+        <div class="logo" id="home-btn">FUCK<span>.TF</span></div>
         <div class="nav-links">
-            <a href="#home">主页</a>
-            <a href="#archive">档案</a>
-            <a href="#about">关于</a>
-            <a href="#contact">联系</a>
+            <a id="home-link" class="active">主页</a>
+            <a id="archive-link">档案</a>
+            <a id="about-link">关于</a>
+            <a id="contact-link">联系</a>
         </div>
     </nav>
     
-    <!-- 主内容区域 -->
-    <main class="main-content">
-        <h1 class="main-title">那些年操过的女孩</h1>
-        <p class="subtitle">
-            一段记忆，一种情感，一场青春。这里记录着时光深处的故事，那些热烈、冲动、美好与遗憾交织的瞬间。<br>
-            每个名字背后都有一段独特的往事，每段往事都构成了今天的我们。
-        </p>
-    </main>
+    <!-- 内容容器 -->
+    <div class="content-container">
+        <!-- 主页内容 -->
+        <div id="home-content">
+            <h1 class="main-title">那些年操过的女孩</h1>
+            <p class="subtitle">
+                一段记忆，一种情感，一场青春。这里记录着时光深处的故事，那些热烈、冲动、美好与遗憾交织的瞬间。<br>
+                每个名字背后都有一段独特的往事，每段往事都构成了今天的我们。
+            </p>
+        </div>
+        
+        <!-- 档案页面内容 -->
+        <div id="archive-content">
+            <div class="archive-header">
+                <h1 class="archive-title">时光档案</h1>
+                <p class="archive-description">
+                    这里收藏着那些无法忘怀的瞬间，每一段故事都是青春的一部分。<br>
+                    点击卡片，重温那些年的悸动与感动。
+                </p>
+            </div>
+            
+            <div class="archive-grid" id="archive-grid">
+                <!-- 档案卡片将通过JavaScript动态生成 -->
+            </div>
+        </div>
+        
+        <!-- 关于页面内容 -->
+        <div id="about-content">
+            <div class="page-header">
+                <h1 class="page-title">关于本站</h1>
+                <p class="page-description">
+                    记录时光，珍藏回忆，致敬青春
+                </p>
+            </div>
+            
+            <div class="about-content">
+                <p>这个网站是一个私人记忆档案馆，致力于保存那些在岁月长河中闪耀的瞬间。</p>
+                <p>每个人心中都有一片属于自己的花园，那里种满了青春的花朵，有的盛开，有的凋零，但每一朵都独一无二。</p>
+                <p>我们相信，每一段经历都有其独特的意义，每一次心动都值得被铭记。这里没有评判，只有记录与珍藏。</p>
+                <p>网站设计追求简洁大气，暗黑主题搭配霓虹色彩，象征着记忆深处那些明亮而深刻的印记。</p>
+                <p>所有内容均为虚构创作，如有雷同，纯属巧合。</p>
+            </div>
+        </div>
+        
+        <!-- 联系页面内容 -->
+        <div id="contact-content">
+            <div class="page-header">
+                <h1 class="page-title">联系我们</h1>
+                <p class="page-description">
+                    分享你的故事，连接彼此的记忆
+                </p>
+            </div>
+            
+            <div class="contact-content">
+                <p>如果你也有想要分享的故事，或者对这个网站有任何建议，欢迎通过以下方式联系我们：</p>
+                
+                <form class="contact-form" id="contact-form">
+                    <div class="form-group">
+                        <label for="name">姓名</label>
+                        <input type="text" id="name" placeholder="请输入您的姓名">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">邮箱</label>
+                        <input type="email" id="email" placeholder="请输入您的邮箱地址">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">留言</label>
+                        <textarea id="message" placeholder="请写下您想分享的故事或建议..."></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">发送消息</button>
+                </form>
+            </div>
+        </div>
+    </div>
     
     <!-- 浮动装饰元素 -->
     <div class="floating-elements" id="floating-elements"></div>
@@ -244,6 +596,64 @@
     </footer>
     
     <script>
+        // 档案数据
+        const archiveData = [
+            {
+                id: 1,
+                title: "夏日的蝉鸣",
+                subtitle: "2018 · 南京",
+                description: "那个夏天，梧桐树下的相遇。记得你穿着白色的连衣裙，笑容比阳光还灿烂。我们走遍了整座城市，从清晨到日暮。",
+                image: "https://images.unsplash.com/photo-1560703650-ef3e0f254ae0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                time: "2018年7月",
+                location: "南京"
+            },
+            {
+                id: 2,
+                title: "冬夜的温度",
+                subtitle: "2020 · 北京",
+                description: "北京的第一个冬天，我们在暖气房里相拥。窗外飘着雪花，屋内温暖如春。你教我煮热红酒，说这是冬天的仪式感。",
+                image: "https://images.unsplash.com/photo-1512386233331-f023884a92e8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                time: "2020年12月",
+                location: "北京"
+            },
+            {
+                id: 3,
+                title: "海边的承诺",
+                subtitle: "2019 · 厦门",
+                description: "鼓浪屿的浪花见证了我们许下的诺言。你说大海不会忘记，就像我永远不会忘记你眼里的星辰。",
+                image: "https://images.unsplash.com/photo-1519046904884-53103b34b206?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                time: "2019年8月",
+                location: "厦门"
+            },
+            {
+                id: 4,
+                title: "雨中的奔跑",
+                subtitle: "2021 · 杭州",
+                description: "突如其来的暴雨，我们在大雨中奔跑。浑身湿透却笑得像个孩子。你说这是最浪漫的狼狈。",
+                image: "https://images.unsplash.com/photo-1439066615861-d1af74d74000?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                time: "2021年5月",
+                location: "杭州"
+            },
+            {
+                id: 5,
+                title: "山顶的日出",
+                subtitle: "2022 · 黄山",
+                description: "凌晨三点开始爬山，只为了和你一起看日出。当太阳升起的那一刻，整个世界都是金色的。",
+                image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                time: "2022年10月",
+                location: "黄山"
+            },
+            {
+                id: 6,
+                title: "图书馆的午后",
+                subtitle: "2017 · 上海",
+                description: "阳光透过百叶窗洒在你的侧脸，你专注看书的样子让我心动。那是我们第一次相遇的地方。",
+                image: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                time: "2017年3月",
+                location: "上海"
+            }
+        ];
+        
         // 创建浮动元素
         function createFloatingElements() {
             const container = document.getElementById('floating-elements');
@@ -275,41 +685,112 @@
             }
         }
         
-        // 添加浮动动画CSS
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes float {
-                0%, 100% {
-                    transform: translate(0, 0) scale(1);
-                    opacity: 0.7;
-                }
-                25% {
-                    transform: translate(10px, -20px) scale(1.1);
-                    opacity: 0.9;
-                }
-                50% {
-                    transform: translate(-15px, 10px) scale(0.9);
-                    opacity: 0.6;
-                }
-                75% {
-                    transform: translate(5px, 15px) scale(1.05);
-                    opacity: 0.8;
-                }
-            }
-        `;
-        document.head.appendChild(style);
+        // 生成档案卡片
+        function generateArchiveCards() {
+            const archiveGrid = document.getElementById('archive-grid');
+            
+            archiveData.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'archive-card';
+                card.innerHTML = `
+                    <div class="card-image">
+                        <img src="${item.image}" alt="${item.title}" loading="lazy">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">${item.title}</h3>
+                        <div class="card-subtitle">${item.subtitle}</div>
+                        <p class="card-description">${item.description}</p>
+                        <div class="card-meta">
+                            <span>${item.time}</span>
+                            <span>${item.location}</span>
+                        </div>
+                    </div>
+                `;
+                
+                // 添加点击事件
+                card.addEventListener('click', function() {
+                    alert(`查看详情: ${item.title}\n时间: ${item.time}\n地点: ${item.location}`);
+                });
+                
+                archiveGrid.appendChild(card);
+            });
+        }
         
-        // 页面加载完成后初始化
+        // 页面切换功能
+        function switchPage(pageId) {
+            // 隐藏所有页面
+            document.getElementById('home-content').style.display = 'none';
+            document.getElementById('archive-content').style.display = 'none';
+            document.getElementById('about-content').style.display = 'none';
+            document.getElementById('contact-content').style.display = 'none';
+            
+            // 显示目标页面
+            document.getElementById(pageId).style.display = 'block';
+            
+            // 更新导航栏活动状态
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            // 根据页面ID设置对应的导航链接为活动状态
+            if (pageId === 'home-content') {
+                document.getElementById('home-link').classList.add('active');
+            } else if (pageId === 'archive-content') {
+                document.getElementById('archive-link').classList.add('active');
+            } else if (pageId === 'about-content') {
+                document.getElementById('about-link').classList.add('active');
+            } else if (pageId === 'contact-content') {
+                document.getElementById('contact-link').classList.add('active');
+            }
+        }
+        
+        // 初始化页面
         document.addEventListener('DOMContentLoaded', function() {
+            // 创建浮动元素
             createFloatingElements();
             
-            // 为导航链接添加平滑滚动
-            document.querySelectorAll('.nav-links a').forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    // 这里可以添加页面滚动逻辑
-                    alert('导航功能示例 - 实际项目中这里会跳转到对应部分');
-                });
+            // 生成档案卡片
+            generateArchiveCards();
+            
+            // 设置导航栏事件
+            document.getElementById('home-btn').addEventListener('click', function() {
+                switchPage('home-content');
+            });
+            
+            document.getElementById('home-link').addEventListener('click', function() {
+                switchPage('home-content');
+            });
+            
+            document.getElementById('archive-link').addEventListener('click', function() {
+                switchPage('archive-content');
+            });
+            
+            document.getElementById('about-link').addEventListener('click', function() {
+                switchPage('about-content');
+            });
+            
+            document.getElementById('contact-link').addEventListener('click', function() {
+                switchPage('contact-content');
+            });
+            
+            // 设置联系表单提交事件
+            document.getElementById('contact-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const message = document.getElementById('message').value;
+                
+                if (!name || !email || !message) {
+                    alert('请填写所有字段');
+                    return;
+                }
+                
+                // 模拟表单提交
+                alert(`感谢您的留言，${name}！我们会尽快回复您。`);
+                
+                // 清空表单
+                document.getElementById('contact-form').reset();
             });
             
             // 视频加载失败时使用备用背景
@@ -318,6 +799,30 @@
                 document.body.style.background = 'radial-gradient(circle at 20% 50%, #1a1a2e 0%, #16213e 50%, #0f3460 100%)';
                 videoBg.style.display = 'none';
             });
+            
+            // 添加浮动动画CSS
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes float {
+                    0%, 100% {
+                        transform: translate(0, 0) scale(1);
+                        opacity: 0.7;
+                    }
+                    25% {
+                        transform: translate(10px, -20px) scale(1.1);
+                        opacity: 0.9;
+                    }
+                    50% {
+                        transform: translate(-15px, 10px) scale(0.9);
+                        opacity: 0.6;
+                    }
+                    75% {
+                        transform: translate(5px, 15px) scale(1.05);
+                        opacity: 0.8;
+                    }
+                }
+            `;
+            document.head.appendChild(style);
         });
     </script>
 </body>
